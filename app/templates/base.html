@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Image Gallery{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Contenedor de los Botones de Navegación -->
+    <div class="button-container">
+        {% block navigation %}
+        <a href="{{ url_for('routes.home') }}" class="nav-button">Home</a>
+        <a href="{{ url_for('routes.competition') }}" class="nav-button">Competition</a>
+        <a href="{{ url_for('routes.gallery') }}" class="nav-button">Gallery</a>
+        {% endblock %}
+    </div>
+
+    <!-- Contenido Principal -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

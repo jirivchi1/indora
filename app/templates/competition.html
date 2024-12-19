@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Competition - Image Gallery{% endblock %}
+
+{% block navigation %}
+    <a href="{{ url_for('routes.home') }}" class="nav-button">Home</a>
+    <a href="{{ url_for('routes.gallery') }}" class="nav-button">Gallery</a>
+    <a href="{{ url_for('routes.submit') }}" class="nav-button">Submit</a>
+{% endblock %}
+
+{% block content %}
+<div class="gallery-container">
+    <h2>Competition Gallery</h2>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <div class="gallery">
+        {% for image in images %}
+        <div class="card">
+            <!-- Usar image_filename para mostrar la imagen generada -->
+            <img src="{{ url_for('static', filename='images/competition/' + image.image_filename) }}" alt="{{ image.prompt }}" class="gallery-img">
+            <div class="card-content">
+                <h2>{{ image.user_name }}</h2>
+                <p class="description">{{ image.prompt }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

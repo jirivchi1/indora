@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Submit - Image Gallery{% endblock %}
+
+{% block navigation %}
+    <a href="{{ url_for('routes.home') }}" class="nav-button">Home</a>
+    <a href="{{ url_for('routes.competition') }}" class="nav-button">Competition</a>
+    <a href="{{ url_for('routes.gallery') }}" class="nav-button">Gallery</a>
+{% endblock %}
+
+{% block content %}
+<div class="gallery-container">
+    <h2>Submit New Entry</h2>
+    <div class="submit-container">
+        <!-- Muestra la imagen -->
+        <img src="{{ url_for('static', filename='images/submit/familia.png') }}" alt="Original Image" class="gallery-img" style="max-width:300px; margin-bottom:20px;">
+        
+        <!-- Formulario -->
+        <form method="POST" action="{{ url_for('routes.submit') }}" class="submit-form">
+            <label for="user_name" style="color:white;">User Name:</label><br>
+            <input type="text" id="user_name" name="user_name" required style="margin-bottom:10px;"><br>
+
+            <label for="prompt" style="color:white;">Prompt:</label><br>
+            <textarea id="prompt" name="prompt" rows="4" cols="50" required style="margin-bottom:10px;"></textarea><br>
+
+            <!-- Botón de Enviar -->
+            <button type="submit" class="nav-button">Enviar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+your_project/
+├── app/
+│   ├── __init__.py
+│   ├── routes.py
+│   ├── templates/
+│   │   ├── base.html
+│   │   ├── index.html
+│   │   ├── competition.html
+│   │   └── gallery.html
+│   └── static/
+│       ├── css/
+│       │   └── styles.css
+│       ├── js/
+│       │   └── scripts.js
+│       └── images/
+│           ├── inicio/
+│           │   ├── fruta_original.jpg
+│           │   ├── fruta_1.jpg
+│           │   └── fruta_2.jpg
+│           ├── competition/
+│           │   ├── competition1.jpg
+│           │   └── competition2.jpg
+│           └── gallery/
+│               ├── 1.jpg
+│               ├── 2.jpg
+│               ├── 3.jpg
+│               └── 4.jpg
+├── run.py
+└── requirements.txt
+
+------------add celery--
+your_project/
+├── README.md
+├── app/
+│   ├── __init__.py
+│   ├── celery_app.py
+│   ├── routes.py
+│   ├── tasks.py
+│   ├── static/
+│   │   ├── css/
+│   │   │   └── styles.css
+│   │   ├── images/
+│   │   │   ├── competition/
+│   │   │   ├── gallery/
+│   │   │   ├── inicio/
+│   │   │   └── original/
+│   │   │       └── first.jpg
+│   │   └── js/
+│   │       └── scripts.js
+│   └── templates/
+│       ├── base.html
+│       ├── competition.html
+│       ├── gallery.html
+│       ├── index.html
+│       └── submit.html
+├── requirements.txt
+├── roadmap/
+│   └── codebase.txt
+└── run.py

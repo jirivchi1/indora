@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Image Gallery{% endblock %}
+
+{% block navigation %}
+    <a href="{{ url_for('routes.competition') }}" class="nav-button">Competition</a>
+    <a href="{{ url_for('routes.gallery') }}" class="nav-button">Gallery</a>
+{% endblock %}
+
+{% block content %}
+<div class="gallery-container">
+    <div class="gallery">
+        {% for image in images %}
+        <div class="card">
+            <img src="{{ url_for('static', filename=image.image_path) }}" alt="{{ image.prompt }}" class="gallery-img">
+            <div class="card-content">
+                <h2>{{ image.user_name }}</h2>
+                <p class="description">{{ image.prompt }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+/venv
+/.env
+
+# Ignorar archivos compilados de Python
+*.pyc
+app/__pycache__/
+app/__pycache__/__init__.cpython-310.pyc
+
+# Ignorar directorios de caché de Python
+**/__pycache__/
+
+# Ignorar imágenes generadas en la galería de competición
+app/static/images/competition/*.png
+
+# Opcional: Ignorar todas las imágenes generadas si usas otros formatos
+# app/static/images/competition/*.[pjPJ][npNP][geGE]*
+
+# Ignorar el archivo de entorno (si aún no lo has hecho)
+.env
+
+# Ignorar otros archivos o directorios que no deseas versionar
+# Por ejemplo, logs, bases de datos locales, etc.
+logs/
+*.log
