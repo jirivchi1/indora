@@ -1,0 +1,4 @@
+linux
+cp ruta/al/directorio/inicio/1.jpg ruta/al/directorio/submit/
+
+

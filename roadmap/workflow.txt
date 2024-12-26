@@ -1,0 +1,7 @@
+El flujo de trabajo ahora es:
+
+1.Un usuario envía un prompt.
+2.Se genera la imagen y su embedding.
+3.Se guarda todo en MongoDB.
+4.En la página de ranking, se calculan las similitudes.
+5.Se muestran las imágenes ordenadas por su similitud con la imagen objetivo.

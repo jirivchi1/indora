@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Ranking - Image Competition{% endblock %}
+
+{% block navigation %}
+    <a href="{{ url_for('routes.home') }}" class="nav-button">Home</a>
+    <a href="{{ url_for('routes.gallery') }}" class="nav-button">Gallery</a>
+    <a href="{{ url_for('routes.competition') }}" class="nav-button">Competition</a>
+    <a href="{{ url_for('routes.submit') }}" class="nav-button">Submit</a>
+{% endblock %}
+
+{% block content %}
+<div class="gallery-container">
+    <h2>Competition Ranking</h2>
+    <div class="gallery">
+        {% for submission in ranked_submissions %}
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/competition/' + submission.image_filename) }}" 
+                 alt="{{ submission.prompt }}" 
+                 class="gallery-img">
+            <div class="card-content">
+                <h2>{{ submission.user_name }}</h2>
+                <p class="description">{{ submission.prompt }}</p>
+                <div class="similarity-score">
+                    <p>Similarity Score: {{ submission.similarity }}%</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
