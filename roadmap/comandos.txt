@@ -1,4 +1,7 @@
 linux
+copiar
 cp ruta/al/directorio/inicio/1.jpg ruta/al/directorio/submit/
 
+renombar
+mv nombre_viejo nombre_nuevo
 

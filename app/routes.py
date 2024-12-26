@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
 from pymongo import MongoClient
 from openai import OpenAI
 from .tasks import generate_image_task
@@ -9,6 +9,9 @@ import os
 # Cargar variables de entorno
 load_dotenv()
 
+# Crear el Blueprint primero
+routes = Blueprint("routes", __name__)
+
 # Conectar a MongoDB y OpenAI
 mongo_client = MongoClient(os.getenv("MONGODB_URI"))
 openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -18,8 +21,6 @@ embedding_service = EmbeddingService(mongo_client, openai_client)
 
 db = mongo_client["image_generation"]
 questions_collection = db["questions"]
-
-routes = Blueprint("routes", __name__)
 
 def collection_exists(db, collection_name):
     return collection_name in db.list_collection_names()
@@ -56,13 +57,14 @@ def submit():
     if request.method == "POST":
         user_name = request.form.get("user_name")
         prompt = request.form.get("prompt")
+        selected_image = request.form.get("selected_image", "familia.png")
 
         if not collection_exists(db, "questions"):
             questions_collection.create_index("user_name")
 
         question = {
             "user_name": user_name,
-            "image_path": "images/original/first.jpg",
+            "image_path": f"images/submit/{selected_image}",
             "prompt": prompt,
             "category": "competition",
             "status": "pending",
@@ -73,4 +75,11 @@ def submit():
         flash("Tu solicitud ha sido enviada y la imagen se generará pronto.")
         return redirect(url_for("routes.competition"))
 
-    return render_template("submit.html")
+    # Obtener lista de imágenes disponibles
+    submit_folder = os.path.join(current_app.static_folder, 'images', 'submit')
+    available_images = [
+        f for f in os.listdir(submit_folder) 
+        if f.lower().endswith(('.png', '.jpg', '.jpeg', '.gif'))
+    ]
+    
+    return render_template("submit.html", available_images=available_images)

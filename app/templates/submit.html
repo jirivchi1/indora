@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-
 {% block title %}Submit - Image Gallery{% endblock %}
-
 {% block navigation %}
     <a href="{{ url_for('routes.home') }}" class="nav-button">Home</a>
     <a href="{{ url_for('routes.competition') }}" class="nav-button">Competition</a>
@@ -12,20 +10,47 @@
 <div class="gallery-container">
     <h2>Submit New Entry</h2>
     <div class="submit-container">
-        <!-- Muestra la imagen -->
-        <img src="{{ url_for('static', filename='images/submit/familia.png') }}" alt="Original Image" class="gallery-img" style="max-width:300px; margin-bottom:20px;">
+        <!-- Selector de imagen -->
+        <div class="image-selector" style="margin-bottom: 20px;">
+            <label for="image-select" style="color:white;">Select Reference Image:</label><br>
+            <select id="image-select" onchange="updateImage()" style="margin-bottom: 10px;">
+                {% for image in available_images %}
+                    <option value="{{ image }}" {% if image == 'familia.png' %}selected{% endif %}>
+                        {{ image }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
         
+        <!-- Contenedor de imagen -->
+        <div id="image-container">
+            <img id="reference-image" src="{{ url_for('static', filename='images/submit/familia.png') }}" 
+                 alt="Reference Image" 
+                 class="gallery-img" 
+                 style="max-width:300px; margin-bottom:20px;">
+        </div>
+
         <!-- Formulario -->
         <form method="POST" action="{{ url_for('routes.submit') }}" class="submit-form">
+            <input type="hidden" id="selected_image" name="selected_image" value="familia.png">
             <label for="user_name" style="color:white;">User Name:</label><br>
             <input type="text" id="user_name" name="user_name" required style="margin-bottom:10px;"><br>
-
             <label for="prompt" style="color:white;">Prompt:</label><br>
             <textarea id="prompt" name="prompt" rows="4" cols="50" required style="margin-bottom:10px;"></textarea><br>
-
-            <!-- Botón de Enviar -->
             <button type="submit" class="nav-button">Enviar</button>
         </form>
     </div>
 </div>
+
+<script>
+function updateImage() {
+    const select = document.getElementById('image-select');
+    const image = document.getElementById('reference-image');
+    const hiddenInput = document.getElementById('selected_image');
+    const selectedImage = select.value;
+    
+    image.src = "{{ url_for('static', filename='images/submit/') }}" + selectedImage;
+    hiddenInput.value = selectedImage;
+}
+</script>
 {% endblock %}
